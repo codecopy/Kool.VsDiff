@@ -2,6 +2,7 @@
 using Kool.VsDiff.Commands;
 using Kool.VsDiff.Models;
 using Kool.VsDiff.Pages;
+using Microsoft.TeamFoundation.Controls;
 using Microsoft.VisualStudio.Shell;
 using System;
 using System.ComponentModel.Design;
@@ -23,6 +24,8 @@ namespace Kool.VsDiff
 
         internal OleMenuCommandService CommandService { get; private set; }
 
+        internal ITeamExplorer TeamExplorer { get; private set; }
+
         protected override void Initialize()
         {
             base.Initialize();
@@ -30,6 +33,10 @@ namespace Kool.VsDiff
             IDE = GetService(typeof(EnvDTE.DTE)) as DTE2;
             CommandService = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             Options = GetDialogPage(typeof(VsDiffOptions)) as VsDiffOptions;
+
+            // Program Files\Common Files\microsoft shared\Team Foundation Server\14.0\Microsoft.TeamFoundation.
+            //https://www.mztools.com/articles/2015/MZ2015007.aspx
+            TeamExplorer = GetService(typeof(ITeamExplorer)) as ITeamExplorer;
 
             VS.Initialize(this);
             DiffToolFactory.Initialize(this);

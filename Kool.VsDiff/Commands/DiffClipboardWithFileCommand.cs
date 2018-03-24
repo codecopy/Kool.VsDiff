@@ -1,4 +1,5 @@
 ﻿using Kool.VsDiff.Models;
+using System;
 using System.IO;
 using static Kool.VsDiff.Models.VS;
 
@@ -30,6 +31,13 @@ namespace Kool.VsDiff.Commands
 
         protected override void OnExecute()
         {
+
+            //var changes = package.teamexplorer.navigatetopage(new guid(microsoft.teamfoundation.controls.teamexplorerpageids.pendingchanges), null);
+
+            //var pendingchangesext = changes.getextensibilityservice(
+            //         typeof(microsoft.teamfoundation.versioncontrol.controls.extensibility.ipendingchangesext))
+            //as microsoft.teamfoundation.versioncontrol.controls.extensibility.ipendingchangesext;
+
             var extension = Path.GetExtension(_selectedFile);
             var clipboardFile = TempFileHelper.CreateTempFile("Clipboard" + extension, _clipboardText);
 
